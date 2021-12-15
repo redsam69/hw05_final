@@ -31,7 +31,7 @@ class PostURLTests(TestCase):
         self.authorized_client.force_login(self.user)
 
     def test_urls_exists(self):
-        '''Общедоступные страницы'''
+        '''Общедоступные страницы.'''
         code_url = {
             '/': HTTPStatus.OK,
             '/group/test-slug/': HTTPStatus.OK,
@@ -56,7 +56,7 @@ class PostURLTests(TestCase):
                 self.assertEqual(response.status_code, code)
 
     def test_redirect_anonymous_on_admin_login(self):
-        '''Редирект неавторизованного пользователя'''
+        '''Редирект неавторизованного пользователя.'''
         url_redirect = {
             '/create/': '/auth/login/?next=/create/',
             f'/posts/{self.id}/edit/':
@@ -69,7 +69,7 @@ class PostURLTests(TestCase):
                     response, redirect)
 
     def test_urls_uses_correct_template(self):
-        '''Шаблоны для всех сраниц'''
+        '''Шаблоны для всех сраниц.'''
         templates_url_names = {
             '/': 'posts/index.html',
             '/group/test-slug/': 'posts/group_list.html',
@@ -77,6 +77,7 @@ class PostURLTests(TestCase):
             f'/posts/{self.id}/': 'posts/post_detail.html',
             f'/posts/{self.id}/edit/': 'posts/create_post.html',
             '/create/': 'posts/create_post.html',
+            '/follow/': 'posts/follow.html',
         }
         for url, template in templates_url_names.items():
             with self.subTest(url=url):

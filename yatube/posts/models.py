@@ -49,7 +49,8 @@ class Post(models.Model):
     image = models.ImageField(
         verbose_name='Картинка',
         upload_to='posts/',
-        blank=True
+        blank=True,
+        null=True
     )
 
     class Meta:
@@ -90,3 +91,11 @@ class Follow(models.Model):
                                on_delete=models.CASCADE,
                                related_name='following',
                                verbose_name='на Автора')
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name='unigue subs'
+            )
+        ]

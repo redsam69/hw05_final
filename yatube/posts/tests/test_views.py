@@ -58,7 +58,7 @@ class PostPagesTests(TestCase):
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
 
     def test_pages_uses_correct_template(self):
-        """Проверка шаблонов"""
+        """Проверка шаблонов."""
         templates_page_names = {
             reverse('posts:index'): 'posts/index.html',
             (reverse('posts:posts_group', kwargs={'slug':
@@ -80,7 +80,7 @@ class PostPagesTests(TestCase):
                 self.assertTemplateUsed(response, template)
 
     def test_show_correct_context_form(self):
-        """Проверка сontext форм"""
+        """Проверка сontext форм."""
         page_names = (
             reverse('posts:post_create'),
             reverse('posts:post_edit',
@@ -94,7 +94,7 @@ class PostPagesTests(TestCase):
                 self.assertIsInstance(context['form'], PostForm)
 
     def test_post_edit_context(self):
-        """Проверка context post edit"""
+        """Проверка context post edit."""
         response = self.authorized_client.get(
             reverse('posts:post_edit',
                     kwargs={'post_id': self.post.id})
@@ -112,7 +112,7 @@ class PostPagesTests(TestCase):
                          self.post.text)
 
     def test_pages_uses_correct_pages(self):
-        """Отображение на страницах"""
+        """Отображение на страницах."""
         url_page_names = (
             reverse('posts:index'),
             reverse('posts:posts_group',
@@ -131,7 +131,7 @@ class PostPagesTests(TestCase):
                 self.assertEqual(post_image_0, self.post.image)
 
     def test_pages_uses_correct_group(self):
-        """Отображение на страниц с переданной группой"""
+        """Отображение на страниц с переданной группой."""
         url_page_names = (
             reverse('posts:index'),
             reverse('posts:posts_group',
@@ -146,7 +146,7 @@ class PostPagesTests(TestCase):
                 self.assertEqual(post_group_0, self.group.title)
 
     def test_task_detail_comment_show_correct_context(self):
-        """Вывод комментария"""
+        """Вывод комментария."""
         comment = Comment.objects.create(
             post=self.post,
             author=self.user,
@@ -160,7 +160,7 @@ class PostPagesTests(TestCase):
     def test_login_user_follow(self):
         """
         Авторизованный пользователь подписывается
-        на других пользователей
+        на других пользователей.
         """
         count_before = len(Follow.objects.filter(author=self.user_2))
         self.authorized_client.get(reverse(
@@ -171,7 +171,7 @@ class PostPagesTests(TestCase):
     def test_login_user_unfollow(self):
         """
         Авторизованный пользователь отписывается от других
-        пользователей
+        пользователей.
         """
         count_before = len(Follow.objects.filter(author=self.user_2))
         self.authorized_client.get(reverse(
@@ -184,7 +184,7 @@ class PostPagesTests(TestCase):
     def test_follow_index(self):
         """
         Новая запись пользователя появляется в ленте тех,
-        кто на него подписан
+        кто на него подписан.
         """
         response = self.authorized_client.get(reverse('posts:follow_index'))
         self.authorized_client.get(
@@ -194,7 +194,7 @@ class PostPagesTests(TestCase):
         self.assertEqual(response.content, response_after_follow.content)
 
     def test_cach_in_index_page(self):
-        """Проверка работы cach"""
+        """Проверка работы cach."""
         response = self.authorized_client.get(reverse('posts:index'))
         before_clearing_the_cache = response.content
         cache.clear()
@@ -225,7 +225,7 @@ class PostPaginatorTests(TestCase):
         self.authorized_client.force_login(self.user)
 
     def test_first_page_contains_ten_records(self):
-        """Проверка пагинатора на 1-й странице"""
+        """Проверка пагинатора на 1-й странице."""
         url_page_names = (
             reverse('posts:index'),
             reverse('posts:posts_group',
@@ -239,7 +239,7 @@ class PostPaginatorTests(TestCase):
                                  settings.PAGE_COUNT)
 
     def test_second_page_contains_three_records(self):
-        """Проверка пагинатора на 2-й странице"""
+        """Проверка пагинатора на 2-й странице."""
         url_page_names = (
             reverse('posts:index'),
             reverse('posts:posts_group',

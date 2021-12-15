@@ -10,7 +10,7 @@ from .forms import PostForm, CommentForm
 
 def index(request):
     template = 'posts/index.html'
-    posts = Post.objects.all()
+    posts = Post.objects.select_related('group').all()
     paginator = Paginator(posts, settings.PAGE_COUNT)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

@@ -41,7 +41,7 @@ class TestCreateForm(TestCase):
         self.authorized_client.force_login(self.user)
 
     def test_form_create(self):
-        """Проверка создания нового поста, авторизированным пользователем"""
+        """Проверка создания нового поста, авторизированным пользователем."""
         post_count = Post.objects.count()
         small_gif = (
             b'\x47\x49\x46\x38\x39\x61\x02\x00'
@@ -74,7 +74,7 @@ class TestCreateForm(TestCase):
 
     def test_form_update(self):
         """
-        Проверка редактирования поста через форму
+        Проверка редактирования поста через форму.
         """
         form_data = {
             'group': self.group.id,
@@ -88,7 +88,7 @@ class TestCreateForm(TestCase):
         self.assertEqual(self.post.group.id, form_data['group'])
 
     def test_form_add_comment(self):
-        """Добавление комментария к посту"""
+        """Добавление комментария к посту."""
         form_data = {
             'text': 'Комментарий!',
         }

@@ -11,7 +11,8 @@ class PostForm(forms.ModelForm):
     def clean_text(self):
         data = self.cleaned_data['text']
         if len(data) < 10:
-            raise forms.ValidationError('Слишком короткий текст')
+            raise forms.ValidationError('Слишком короткий текст,'
+                                        ' не менее 10 символов')
         return data
 
 
